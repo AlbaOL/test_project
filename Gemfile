@@ -24,6 +24,9 @@ gem 'jbuilder', '~> 2.7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+gem 'httparty'
+
+gem 'devise-jwt', git: 'https://github.com/waiting-for-dev/devise-jwt.git'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -31,6 +34,14 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'factory_bot_rails'
+  gem 'guard-rails'
+  gem 'guard-rspec'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'jwt'
+  gem 'pry', git: 'https://github.com/pry/pry.git', ref: '272b3290b5250d28ee82a5ff65aa3b29b825e37b'
+  gem 'pry-remote'
+  gem 'pry-nav'
 end
 
 group :development do

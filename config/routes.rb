@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :users
+  get 'home/index'
+  devise_for :views
   namespace :api do
     namespace :v1 do
       get 'recipes/index'
