@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get '/show/:id', to: 'recipes#show'
       delete '/destroy/:id', to: 'recipes#destroy'
       post 'licenses/read_license_file'
+      get 'licenses/print_license'
     end
   end
   get '/*path' => 'homepage#index'
