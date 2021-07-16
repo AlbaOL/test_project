@@ -17,7 +17,7 @@ class Api::V1::LicensesController < ApplicationController
 
   def print_license
     begin
-      #Ideally licenses and users needs a reference for this POC license will be harcoded
+      #Ideally licenses and users needs a reference, for this POC license will be harcoded
       # license = License.where(user: current_user)
       license = License.first
       render json: PdfService.generate(license), status: 200

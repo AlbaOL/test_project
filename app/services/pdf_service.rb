@@ -35,6 +35,6 @@ class PdfService
       attributes = SECTION_1_ATTRIBUTES.map do |attribute|
         attribute.merge(value: license[attribute[:name]].to_s)
       end
-      print_section(pdf, "", [{attributes: attributes}])
+      print_section(pdf, "Rider's license", [{attributes: attributes}], false)
     end
   end
