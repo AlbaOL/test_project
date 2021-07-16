@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'registrations',
+    sessions: 'sessions',
+  }
   get 'home/index'
   devise_for :views
   namespace :api do
@@ -9,6 +12,7 @@ Rails.application.routes.draw do
       put '/edit/:id', to: 'recipes#put'
       get '/show/:id', to: 'recipes#show'
       delete '/destroy/:id', to: 'recipes#destroy'
+      post 'licenses/read_license_file'
     end
   end
   get '/*path' => 'homepage#index'
