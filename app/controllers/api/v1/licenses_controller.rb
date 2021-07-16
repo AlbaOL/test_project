@@ -2,6 +2,11 @@ class Api::V1::LicensesController < ApplicationController
   before_action :authenticate_user!
   require 'csv'
 
+  def index
+    licenses = License.all.order(created_at: :asc)
+    render json: licenses
+  end
+
   def read_license_file
     begin
       csv_text = File.read(params[:file])

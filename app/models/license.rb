@@ -5,4 +5,6 @@ class License < ApplicationRecord
     validates :sex, presence: true
     validates :rider_birth_date, presence: true
     validates :expiration_date, presence: true
+
+    # default_scope :order => "created_at DESC"
 end

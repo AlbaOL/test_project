@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       put '/edit/:id', to: 'recipes#put'
       get '/show/:id', to: 'recipes#show'
       delete '/destroy/:id', to: 'recipes#destroy'
+      get 'licenses/index'
       post 'licenses/read_license_file'
       get 'licenses/print_license'
     end
