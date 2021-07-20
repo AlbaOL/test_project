@@ -10,11 +10,10 @@ class License < ApplicationRecord
 
     # default_scope :order => "created_at DESC"
 
-    def nightly_activity_report(send_to, requester, license)
-        @receiver = requester
-        @activity = calculate_daily_activity
-        mail(to: send_to, subject: "Bikes Anonymous Daily Report")
-    end
+    # def nightly_activity_report(send_to, license)
+    #     @activity = calculate_daily_activity
+    #     mail(to: send_to, @activity, subject: "Bikes Anonymous Daily Report")
+    # end
 
     def self.calculate_daily_activity
         return '#Licenses received: ' + " #{received.count}" + ' #Licenses certified: '+ " #{certified.count}" + ' #Licenses rejected: ' + " #{rejected.count}"

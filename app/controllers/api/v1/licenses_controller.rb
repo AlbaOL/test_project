@@ -4,13 +4,14 @@ class Api::V1::LicensesController < ApplicationController
 
   def index
     begin
-      role = current_user.role
-      case role
-      when 'rider'
-        licenses = License.where(user: current_user)
-      when 'ba'
-        licenses = License.all.order(created_at: :asc)
-      end
+      # role = current_user.role
+      # case role
+      # when 'rider'
+      #   licenses = License.where(user: current_user)
+      # when 'ba'
+      #   licenses = License.all.order(created_at: :asc)
+      # end
+      licenses = License.all.order(created_at: :asc)
       render json: licenses, status: 200
     rescue => exception
       render json: exception.message, status: 400
@@ -20,10 +21,19 @@ class Api::V1::LicensesController < ApplicationController
   #To be called by an action component in the frontend
   def read_license_file
     begin
-      csv_text = File.read(params[:file])
-      csv = CSV.parse(csv_text, :headers => true, header_converters: :symbol)
-      csv.each do |row|
-        License.create!(row.to_hash)
+      extension = File.extname(params[:file].original_filename)
+      file_text = File.read(params[:file])
+
+      if extension == ".csv"
+        csv = CSV.parse(file_text, :headers => true, header_converters: :symbol)
+        csv.each do |row|
+          License.create!(row.to_hash)
+        end
+      elsif extension == ".json"
+        json = JSON.parse(file_text)
+        json["licenses"].each do |row|
+          License.create(row.to_hash)
+        end
       end
       render json: "File received!", status: 200
     rescue => exception
@@ -36,7 +46,7 @@ class Api::V1::LicensesController < ApplicationController
     begin
       #Ideally licenses and users needs a reference, for this POC license will be harcoded
       # license = License.where(user: current_user)
-      license = License.first
+      license = License.last
       render json: PdfService.generate(license), status: 200
     rescue => exception
       render json: exception.message, status: 400
